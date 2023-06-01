@@ -1,9 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:auth="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
     tools:context=".ui.auth.fragment.RegisterFragment">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp">
 
-</FrameLayout>
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_coffeebid_logo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".05"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/title_register"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/siv_coffeebid_logo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_subtitle_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/subtitle_auth"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_register" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_name"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="48dp"
+            android:hint="Masukkan nama"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_register"
+            auth:name="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_email"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:hint="Masukkan email"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_name"
+            auth:email="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_password"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:hint="Masukkan password"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_email"
+            auth:password="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_password_confirm"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:hint="Konfirmasi password"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_password"
+            auth:password="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_address"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:hint="Masukkan Address"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_password_confirm"
+            auth:address="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_phone"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:hint="Masukkan nama"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_address"
+            auth:phone="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="20dp"
+            android:text="@string/register"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_phone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

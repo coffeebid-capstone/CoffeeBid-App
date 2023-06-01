@@ -12,7 +12,6 @@
         <shape>
             <solid android:color="?attr/colorSurfaceVariant" />
             <corners android:radius="8dp" />
-            <stroke android:width="2dp" android:color="?attr/colorOutline" />
         </shape>
     </item>
 

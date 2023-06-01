@@ -8,4 +8,8 @@
     <string name="error_password">Pastikan password lebih dari 8 karakter</string>
     <string name="error_address">Pastikan isi kolom alamat dengan benar</string>
     <string name="error_phone">Pastikan Nomor Hp Valid</string>
+    <string name="title_register">Register to get your Account</string>
+    <string name="subtitle_auth">Find all coffee’s in one place by\nsigning the app easily</string>
+    <string name="login_title">Login to Win your Coffee</string>
+    <string name="login">Login</string>
 </resources>
