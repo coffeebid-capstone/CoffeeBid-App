@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_navigation"
+    app:startDestination="@id/login_navigation">
+
+    <fragment
+        android:id="@+id/login_navigation"
+        android:name="com.aplimelta.coffeebidapp.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" />
+    <fragment
+        android:id="@+id/register_navigation"
+        android:name="com.aplimelta.coffeebidapp.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register" />
+</navigation>
