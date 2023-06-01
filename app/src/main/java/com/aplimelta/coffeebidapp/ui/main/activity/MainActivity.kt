@@ -1,4 +1,4 @@
-package com.aplimelta.coffeebidapp
+package com.aplimelta.coffeebidapp.ui.main.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

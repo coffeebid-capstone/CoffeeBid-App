@@ -1,22 +1,22 @@
-package com.aplimelta.coffeebidapp
+package com.aplimelta.coffeebidapp.ui.main.fragment
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.aplimelta.coffeebidapp.databinding.FragmentRegisterBinding
+import com.aplimelta.coffeebidapp.databinding.FragmentHistoryBinding
 
-class RegisterFragment : Fragment() {
+class HistoryFragment : Fragment() {
 
-    private var _binding: FragmentRegisterBinding? = null
+    private var _binding: FragmentHistoryBinding? = null
     private val binding get() = _binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentHistoryBinding.inflate(inflater, container, false)
         return binding?.root
     }
 
@@ -32,4 +32,5 @@ class RegisterFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }

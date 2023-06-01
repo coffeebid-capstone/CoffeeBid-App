@@ -4,4 +4,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
     <string name="register">Register</string>
+    <string name="error_email">Pastikan format email benar</string>
+    <string name="error_password">Pastikan password lebih dari 8 karakter</string>
+    <string name="error_address">Pastikan isi kolom alamat dengan benar</string>
+    <string name="error_phone">Pastikan Nomor Hp Valid</string>
 </resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CoffeeEditText">
+        <attr name="name" format="boolean" />
+        <attr name="email" format="boolean" />
+        <attr name="password" format="boolean" />
+        <attr name="address" format="boolean" />
+        <attr name="phone" format="boolean" />
+    </declare-styleable>
+
+    <attr name="state_error" format="boolean" />
+</resources>

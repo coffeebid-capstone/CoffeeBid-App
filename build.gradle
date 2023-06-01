@@ -2,9 +2,14 @@
 buildscript {
     ext {
         navigation_safe_args_version = '2.5.3'
+        kotlin_version = '1.8.21'
     }
     dependencies {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_safe_args_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+    repositories {
+        mavenCentral()
     }
 }
 

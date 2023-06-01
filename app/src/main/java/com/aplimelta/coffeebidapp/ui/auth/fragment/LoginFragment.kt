@@ -1,4 +1,4 @@
-package com.aplimelta.coffeebidapp
+package com.aplimelta.coffeebidapp.ui.auth.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
