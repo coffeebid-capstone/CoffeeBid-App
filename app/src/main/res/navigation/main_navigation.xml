@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/home_navigation">
+
+    <fragment
+        android:id="@+id/home_navigation"
+        android:name="com.aplimelta.coffeebidapp.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/detection_navigation"
+        android:name="com.aplimelta.coffeebidapp.DetectionFragment"
+        android:label="Detection"
+        tools:layout="@layout/fragment_detection" />
+    <fragment
+        android:id="@+id/history_navigation"
+        android:name="com.aplimelta.coffeebidapp.HistoryFragment"
+        android:label="History"
+        tools:layout="@layout/fragment_history" />
+    <fragment
+        android:id="@+id/profile_navigation"
+        android:name="com.aplimelta.coffeebidapp.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
