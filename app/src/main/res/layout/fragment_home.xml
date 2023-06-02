@@ -30,13 +30,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_auction_running"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Lelang berjalan"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_coffees"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/rv_running"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
+                android:orientation="horizontal"
                 android:paddingTop="10dp"
+                android:layout_marginTop="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@id/tv_auction_running"
+                app:layout_constraintTop_toBottomOf="@id/tv_auction_running"
                 tools:listitem="@layout/item_row_coffeebid" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_auction_schedule"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Lelang akan datang"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_running" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

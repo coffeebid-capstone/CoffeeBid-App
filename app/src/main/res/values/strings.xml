@@ -12,4 +12,8 @@
     <string name="subtitle_auth">Find all coffee’s in one place by\nsigning the app easily</string>
     <string name="login_title">Login to Win your Coffee</string>
     <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="detection">Detection</string>
+    <string name="history">History</string>
+    <string name="profile">Profile</string>
 </resources>
