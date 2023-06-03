@@ -13,6 +13,9 @@
         android:theme="@style/Theme.CoffeeBidApp"
         tools:targetApi="31">
         <activity
+            android:name=".ui.main.activity.CameraActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.auth.activity.AuthActivity"
             android:exported="false" />
         <activity
