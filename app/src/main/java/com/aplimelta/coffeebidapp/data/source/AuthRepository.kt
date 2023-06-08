@@ -1,5 +1,6 @@
 package com.aplimelta.coffeebidapp.data.source
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
 import com.aplimelta.coffeebidapp.data.source.remote.network.ApiServices
@@ -29,6 +30,7 @@ class AuthRepository private constructor(private val client: ApiServices) {
     fun profile(): LiveData<ProfileResponse> = liveData {
         try {
             val response = client.profile()
+            Log.i("Repository", "profile: $response")
             emit(response)
         } catch (e: Exception) {
             e.printStackTrace()

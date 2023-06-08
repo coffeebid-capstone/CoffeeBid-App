@@ -29,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         viewModel.profile.observe(this) { result ->
             if (result != null && result.uuid.isNotEmpty()) {
+                val navHostFragment =
+                    supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
+                val navController = navHostFragment.navController
+                binding.mainBottomNavigation.setupWithNavController(navController)
+
                 Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
             } else {
                 Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
@@ -36,10 +41,5 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
-
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
-        val navController = navHostFragment.navController
-        binding.mainBottomNavigation.setupWithNavController(navController)
     }
 }

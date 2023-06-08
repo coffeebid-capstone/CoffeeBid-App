@@ -35,7 +35,6 @@ class AuthActivity : AppCompatActivity() {
                     binding.authFooter.tvInfoAuth.text = resources.getString(R.string.don_t_have_an_account_yet)
                     binding.authFooter.btnRegister.text = resources.getString(R.string.sign_up)
                     binding.authFooter.btnRegister.setOnClickListener {
-                        Toast.makeText(this, "Login", Toast.LENGTH_LONG).show()
                         navController.navigate(R.id.register_navigation)
                     }
                 }
@@ -44,7 +43,6 @@ class AuthActivity : AppCompatActivity() {
                     binding.authFooter.tvInfoAuth.text = resources.getString(R.string.already_have_an_account)
                     binding.authFooter.btnRegister.text = resources.getString(R.string.sign_in)
                     binding.authFooter.btnRegister.setOnClickListener {
-                        Toast.makeText(this, "Register", Toast.LENGTH_LONG).show()
                         navController.navigate(R.id.login_navigation)
                     }
                 }

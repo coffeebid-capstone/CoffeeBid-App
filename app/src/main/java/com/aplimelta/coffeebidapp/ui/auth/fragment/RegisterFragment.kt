@@ -1,12 +1,13 @@
 package com.aplimelta.coffeebidapp.ui.auth.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.aplimelta.coffeebidapp.R
 import com.aplimelta.coffeebidapp.data.source.remote.request.SignUpRequest
@@ -19,7 +20,7 @@ class RegisterFragment : Fragment() {
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding
 
-    private val viewModel: MainViewModel by viewModels {
+    private val viewModel: MainViewModel by activityViewModels {
         ViewModelFactory.getInstance()
     }
 
@@ -35,29 +36,37 @@ class RegisterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-
-            val password = binding?.cetRegisterPassword?.text?.trim().toString()
-            val address = binding?.cetRegisterAddress?.text?.trim().toString()
-            val role = "admin"
-            val contact = binding?.cetRegisterPhone?.text?.trim().toString()
-            val confirmPassword = binding?.cetRegisterPasswordConfirm?.text?.trim().toString()
-            val email = binding?.cetRegisterEmail?.text?.trim().toString()
-            val username = binding?.cetRegisterName?.text?.trim().toString()
+            val etUsername = binding?.cetRegisterName
+            val etEmail = binding?.cetRegisterEmail
+            val etPassword = binding?.cetRegisterPassword
+            val etPasswordConfirm = binding?.cetRegisterPasswordConfirm
+            val etAddress = binding?.cetRegisterAddress
+            val etPhone = binding?.cetRegisterPhone
 
             binding?.btnRegister?.setOnClickListener {
-                viewModel.signUp(
-                    SignUpRequest(
-                        password = password,
-                        address = address,
-                        role = role,
-                        contact = contact,
-                        confirmPassword = confirmPassword,
-                        email = email,
-                        username = username,
-                    )
-                ).observe(viewLifecycleOwner) {
-                    Toast.makeText(requireContext(), "Success:${it}", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(R.id.login_navigation)
+                if (etUsername != null && etEmail != null && etPassword != null && etPasswordConfirm != null && etAddress != null && etPhone != null) {
+                    val password = etPassword.text?.trim().toString()
+                    val address = etAddress.text?.trim().toString()
+                    val role = "admin"
+                    val contact = etPhone.text?.trim().toString()
+                    val confirmPassword = etPasswordConfirm.text?.trim().toString()
+                    val email = etEmail.text?.trim().toString()
+                    val username = etUsername.text?.trim().toString()
+
+                    viewModel.signUp(
+                        SignUpRequest(
+                            password = password,
+                            address = address,
+                            role = role,
+                            contact = contact,
+                            confirmPassword = confirmPassword,
+                            email = email,
+                            username = username,
+                        )
+                    ).observe(viewLifecycleOwner) {
+                        Toast.makeText(requireContext(), "Success:${it}", Toast.LENGTH_LONG).show()
+                        findNavController().navigate(R.id.login_navigation)
+                    }
                 }
             }
         }

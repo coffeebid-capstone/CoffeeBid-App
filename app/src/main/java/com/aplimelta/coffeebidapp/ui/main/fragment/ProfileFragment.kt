@@ -35,6 +35,13 @@ class ProfileFragment : Fragment() {
 
         if (activity != null) {
             binding?.apply {
+                viewModel.profile.observe(viewLifecycleOwner) { result ->
+                    if (result != null) run {
+                        tvProfileName.text = result.username
+                        tvProfileEmail.text = result.email
+                    }
+                }
+
                 actionLogout.setOnClickListener {
                     viewModel.logout.observe(viewLifecycleOwner) {
                         Toast.makeText(requireActivity(), it, Toast.LENGTH_LONG).show()

@@ -189,11 +189,11 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
                                 }
 
                                 MotionEvent.ACTION_UP -> {
-                                    transformationMethod = if (v.isPressed) {
-                                        v.isPressed = !v.isPressed
+                                    transformationMethod = if (v.isSelected) {
+                                        v.isSelected = !v.isSelected
                                         PasswordTransformationMethod.getInstance()
                                     } else {
-                                        v.isPressed = !v.isPressed
+                                        v.isSelected = !v.isSelected
                                         HideReturnsTransformationMethod.getInstance()
                                     }
                                     true
@@ -202,7 +202,6 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
                                 else -> false
                             }
                         }
-
                         else -> showClearButton()
                     }
                 } else return false
