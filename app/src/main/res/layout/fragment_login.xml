@@ -12,16 +12,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.imageview.ShapeableImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/siv_coffeebid_logo"
             android:layout_width="96dp"
             android:layout_height="96dp"
+            android:src="@drawable/coffeebid_logo"
+            app:civ_border_color="?attr/colorPrimary"
+            app:civ_border_width="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".05"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintVertical_bias=".05" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title_login"
@@ -29,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/login_title"
+            android:textAlignment="center"
             android:textColor="?attr/colorOnSurface"
             android:textSize="26sp"
             android:textStyle="bold"
@@ -55,6 +58,7 @@
             android:layout_height="?attr/actionBarSize"
             android:layout_marginHorizontal="32dp"
             android:layout_marginTop="48dp"
+            android:gravity="center_vertical"
             android:hint="Masukkan email"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
