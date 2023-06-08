@@ -17,7 +17,7 @@ class AuthRepository private constructor(private val client: ApiServices) {
         }
     }
 
-    fun signIp(signInRequest: SignInRequest): LiveData<ProfileResponse> = liveData {
+    fun signIn(signInRequest: SignInRequest): LiveData<ProfileResponse> = liveData {
         try {
             val response = client.signIn(signInRequest)
             emit(response)

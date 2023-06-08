@@ -8,7 +8,7 @@ import com.aplimelta.coffeebidapp.data.source.remote.request.SignUpRequest
 class MainViewModel(private val repository: AuthRepository) : ViewModel() {
 
     fun signUp(signUpRequest: SignUpRequest) = repository.signUp(signUpRequest)
-    fun signIn(signInRequest: SignInRequest) = repository.signIp(signInRequest)
+    fun signIn(signInRequest: SignInRequest) = repository.signIn(signInRequest)
     val profile = repository.profile()
     val logout = repository.signOut()
 

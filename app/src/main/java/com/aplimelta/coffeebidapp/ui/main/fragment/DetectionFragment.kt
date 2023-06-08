@@ -108,8 +108,11 @@ class DetectionFragment : Fragment() {
 
         private val REQUIRED_PERMISSION = mutableListOf(
             Manifest.permission.CAMERA
-        )
-        private const val REQUEST_CODE_PERMISSION = 10
+        ).apply {
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            }
+        }.toTypedArray()
         private val MAKE_REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA)
     }
 }

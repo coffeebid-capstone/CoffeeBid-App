@@ -1,8 +1,11 @@
 package com.aplimelta.coffeebidapp.ui.main.activity
 
+import android.content.ContentValues
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -16,6 +19,12 @@ import androidx.core.content.ContextCompat
 import com.aplimelta.coffeebidapp.databinding.ActivityCameraBinding
 import com.aplimelta.coffeebidapp.ui.main.fragment.DetectionFragment.Companion.CAMERA_X_RESULT
 import com.aplimelta.coffeebidapp.utils.createFile
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+
+typealias CoffeeListener = (coffee: Double) -> Unit
 
 class CameraActivity : AppCompatActivity() {
 
@@ -25,6 +34,8 @@ class CameraActivity : AppCompatActivity() {
 
     private var imageCapture: ImageCapture? = null
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+    lateinit var cameraExecutor: ExecutorService
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +50,8 @@ class CameraActivity : AppCompatActivity() {
 
             startCamera()
         }
+
+        cameraExecutor = Executors.newSingleThreadExecutor()
     }
 
     private fun startCamera() {
@@ -68,14 +81,37 @@ class CameraActivity : AppCompatActivity() {
         val imageCapture = imageCapture ?: return
 
         val photoFile = createFile(application)
-        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+//        val outputOptions = ImageCapture.OutputFileOptions.Builder(photoFile).build()
+
+        val name = SimpleDateFormat(
+            "yyyy-MM-dd-HH-mm-ss-SSS",
+            Locale.US
+        ).format(System.currentTimeMillis())
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, name)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
+                put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/CoffeeBid-Image")
+            }
+        }
+        val outputOptions = ImageCapture.OutputFileOptions.Builder(
+            contentResolver,
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        ).build()
+
 
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
-                    Toast.makeText(this@CameraActivity, "berhasil simpan gambar", Toast.LENGTH_LONG)
+                    val savedUri = Uri.fromFile(photoFile)
+                    Toast.makeText(
+                        this@CameraActivity,
+                        "Berhasil simpan gambar $savedUri",
+                        Toast.LENGTH_LONG
+                    )
                         .show()
                     val intent = Intent()
                     intent.putExtra("picture", photoFile)
@@ -104,5 +140,10 @@ class CameraActivity : AppCompatActivity() {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraExecutor.shutdown()
     }
 }

@@ -3,8 +3,6 @@ package com.aplimelta.coffeebidapp.customview
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.text.Editable
-import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.util.AttributeSet
@@ -13,6 +11,7 @@ import android.view.View
 import androidx.annotation.AttrRes
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import com.aplimelta.coffeebidapp.R
 
 class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
@@ -86,40 +85,30 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
 
         setOnTouchListener(this)
 
-        addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+        doOnTextChanged { text, _, _, _ ->
+            error = when {
+                isEmail && text.toString().isEmpty() -> {
+                    resources.getString(R.string.error_email)
+                }
 
-            }
+                isPassword && text.toString().isEmpty() && text.toString().length < 8 -> {
+                    resources.getString(R.string.error_password)
+                }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                error = when {
-                    isEmail && s.toString().isEmpty() -> {
-                        resources.getString(R.string.error_email)
-                    }
+                isAddress && text.toString().isEmpty() -> {
+                    resources.getString(R.string.error_address)
+                }
 
-                    isPassword && s.toString().isEmpty() && s.toString().length < 8 -> {
-                        resources.getString(R.string.error_password)
-                    }
+                isPhone && text.toString().isEmpty() -> {
+                    resources.getString(R.string.error_phone)
+                }
 
-                    isAddress && s.toString().isEmpty() -> {
-                        resources.getString(R.string.error_address)
-                    }
-
-                    isPhone && s.toString().isEmpty() -> {
-                        resources.getString(R.string.error_phone)
-                    }
-
-                    else -> {
-                        showClearButton()
-                        null
-                    }
+                else -> {
+                    showClearButton()
+                    null
                 }
             }
-
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-        })
+        }
 
         typedArray.recycle()
     }
@@ -177,7 +166,7 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
                     }
                 } else {
                     clearDrawableStart =
-                        (v.width + v.paddingEnd - mPasswordDrawableSelector.intrinsicWidth).toFloat()
+                        (v.width - v.paddingEnd - mPasswordDrawableSelector.intrinsicWidth).toFloat()
 
                     when {
                         event.x > clearDrawableStart -> isEndDrawableClicked = true
