@@ -2,14 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-feature android:name="android.hardware.camera.any" />
-
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -21,13 +13,7 @@
         android:theme="@style/Theme.CoffeeBidApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.activity.CameraActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.auth.activity.AuthActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.activity.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
