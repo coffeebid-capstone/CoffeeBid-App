@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="8dp"
+    android:layout_marginBottom="14dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_item_photo"
+            android:layout_width="165dp"
+            android:layout_height="110dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Kopi Arabika"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/siv_item_photo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_item_location"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_location_24"
+            app:layout_constraintStart_toStartOf="@id/tv_item_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_item_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_location"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="Semarang"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/siv_item_location"
+            app:layout_constraintEnd_toStartOf="@id/siv_item_photo"
+            app:layout_constraintStart_toEndOf="@id/siv_item_location"
+            app:layout_constraintTop_toTopOf="@id/siv_item_location" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/siv_item_date"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/ic_date_range_24"
+            app:layout_constraintStart_toStartOf="@id/siv_item_location"
+            app:layout_constraintTop_toBottomOf="@id/siv_item_location" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_item_date"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:text="12-03-2023 13:00:00 WIB"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/siv_item_date"
+            app:layout_constraintEnd_toStartOf="@id/siv_item_photo"
+            app:layout_constraintStart_toEndOf="@id/siv_item_date"
+            app:layout_constraintTop_toTopOf="@id/siv_item_date" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_item_auction"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Ikuti lelang"
+            app:layout_constraintEnd_toEndOf="@id/siv_item_photo"
+            app:layout_constraintTop_toBottomOf="@id/siv_item_photo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_info_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Harga dasar"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/btn_item_auction"
+            app:layout_constraintStart_toStartOf="@id/tv_item_title" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:text="Rp.30.000"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@id/tv_item_title"
+            app:layout_constraintTop_toTopOf="@id/btn_item_auction" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
