@@ -93,19 +93,19 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 error = when {
-                    isEmail && s.toString().isNotEmpty() -> {
+                    isEmail && s.toString().isEmpty() -> {
                         resources.getString(R.string.error_email)
                     }
 
-                    isPassword && s.toString().isNotEmpty() && s.toString().length < 8 -> {
+                    isPassword && s.toString().isEmpty() && s.toString().length < 8 -> {
                         resources.getString(R.string.error_password)
                     }
 
-                    isAddress && s.toString().isNotEmpty() -> {
+                    isAddress && s.toString().isEmpty() -> {
                         resources.getString(R.string.error_address)
                     }
 
-                    isPhone && s.toString().isNotEmpty() -> {
+                    isPhone && s.toString().isEmpty() -> {
                         resources.getString(R.string.error_phone)
                     }
 

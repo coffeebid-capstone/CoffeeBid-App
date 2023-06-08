@@ -1,11 +1,17 @@
 package com.aplimelta.coffeebidapp.ui.main.activity
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
+import com.aplimelta.coffeebidapp.R
 import com.aplimelta.coffeebidapp.databinding.ActivityMainBinding
+import com.aplimelta.coffeebidapp.ui.MainViewModel
+import com.aplimelta.coffeebidapp.ui.ViewModelFactory
+import com.aplimelta.coffeebidapp.ui.auth.activity.AuthActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,15 +19,27 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val viewModel: MainViewModel by viewModels {
+        ViewModelFactory.getInstance()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        val navHostFragment =
-            supportFragmentManager.findFragmentById(androidx.navigation.fragment.R.id.nav_host_fragment_container) as NavHostFragment
-        val navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        viewModel.profile.observe(this) { result ->
+            if (result != null && result.uuid.isNotEmpty()) {
+                Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this@MainActivity, AuthActivity::class.java))
+                finish()
+            }
+        }
 
-//        setupActionBarWithNavController(navController, appBarConfiguration)
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.mainBottomNavigation.setupWithNavController(navController)
     }
 }

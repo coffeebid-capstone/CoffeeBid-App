@@ -17,7 +17,7 @@ object ApiConfig {
         }.build()
 
         val retrofit = Retrofit.Builder().apply {
-            baseUrl("")
+            baseUrl("https://coffeebid-capstone.et.r.appspot.com/")
             addConverterFactory(GsonConverterFactory.create())
             client(client)
         }.build()

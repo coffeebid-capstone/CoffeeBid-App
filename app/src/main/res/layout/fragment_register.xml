@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="20dp">
+        android:paddingBottom="100dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/siv_coffeebid_logo"
@@ -24,7 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias=".05" />
+            app:layout_constraintVertical_bias=".1" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_title_register"
@@ -32,9 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/title_register"
+            android:textAlignment="center"
             android:textColor="?attr/colorOnSurface"
             android:textSize="26sp"
-            android:textAlignment="center"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

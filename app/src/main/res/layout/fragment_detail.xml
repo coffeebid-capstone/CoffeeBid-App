@@ -5,62 +5,53 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.main.fragment.DetectionFragment">
+    tools:context=".ui.main.fragment.DetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:title="@string/detection" />
+            android:layout_height="?attr/actionBarSize" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true">
+            android:nestedScrollingEnabled="false">
 
             <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/siv_photo_preview"
+                android:id="@+id/siv_detail_photo"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="28dp"
+                android:layout_height="450dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="24dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_info_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Take a picture"
-                android:textColor="@color/black"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
-                app:layout_constraintTop_toBottomOf="@+id/siv_photo_preview" />
+
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_camera"
                 android:layout_width="0dp"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="14dp"
-                android:text="Camera"
-                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
-                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
-                app:layout_constraintTop_toBottomOf="@+id/tv_info_photo" />
+                android:text="Ikuti lelang"
+                android:id="@+id/btn_detail_auction"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/siv_detail_photo"
+                app:layout_constraintStart_toStartOf="@id/siv_detail_photo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
