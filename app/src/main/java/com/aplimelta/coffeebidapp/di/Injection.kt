@@ -1,5 +1,6 @@
 package com.aplimelta.coffeebidapp.di
 
+import android.content.Context
 import com.aplimelta.coffeebidapp.data.source.AuthRepository
 import com.aplimelta.coffeebidapp.data.source.remote.network.ApiConfig
 

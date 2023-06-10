@@ -1,11 +1,9 @@
 package com.aplimelta.coffeebidapp.ui.auth.fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -64,7 +62,6 @@ class RegisterFragment : Fragment() {
                             username = username,
                         )
                     ).observe(viewLifecycleOwner) {
-                        Toast.makeText(requireContext(), "Success:${it}", Toast.LENGTH_LONG).show()
                         findNavController().navigate(R.id.login_navigation)
                     }
                 }

@@ -4,6 +4,7 @@ import com.aplimelta.coffeebidapp.data.source.remote.request.SignInRequest
 import com.aplimelta.coffeebidapp.data.source.remote.request.SignUpRequest
 import com.aplimelta.coffeebidapp.data.source.remote.response.AuthResponse
 import com.aplimelta.coffeebidapp.data.source.remote.response.ProfileResponse
+import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -22,7 +23,7 @@ interface ApiServices {
     ): ProfileResponse
 
     @GET("api/v1/profile")
-    suspend fun profile(): ProfileResponse
+    fun profile(): Call<ProfileResponse>
 
     @DELETE("api/v1/auth/signOut")
     suspend fun signOut(): AuthResponse

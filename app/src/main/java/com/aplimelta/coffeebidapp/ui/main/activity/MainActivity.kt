@@ -2,6 +2,7 @@ package com.aplimelta.coffeebidapp.ui.main.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -28,18 +29,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel.profile.observe(this) { result ->
-            if (result != null && result.uuid.isNotEmpty()) {
-                val navHostFragment =
-                    supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
-                val navController = navHostFragment.navController
-                binding.mainBottomNavigation.setupWithNavController(navController)
-
+            if (result != null) {
+                binding.container.visibility = View.VISIBLE
                 Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
             } else {
-                Toast.makeText(this, "$result", Toast.LENGTH_LONG).show()
+                binding.container.visibility = View.INVISIBLE
                 startActivity(Intent(this@MainActivity, AuthActivity::class.java))
                 finish()
             }
         }
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.main_fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.navController
+        binding.mainBottomNavigation.setupWithNavController(navController)
+
     }
 }

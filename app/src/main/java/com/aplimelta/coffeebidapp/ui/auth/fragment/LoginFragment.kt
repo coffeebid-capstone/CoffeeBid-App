@@ -34,11 +34,11 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            val isPassword = binding?.cetLoginPassword
             val isEmail = binding?.cetLoginEmail
+            val isPassword = binding?.cetLoginPassword
 
             binding?.btnLogin?.setOnClickListener {
-                if (isPassword != null && isEmail != null) {
+                if (isEmail != null && isPassword != null) {
                     val password = isPassword.text?.trim().toString()
                     val email = isEmail.text?.trim().toString()
 
@@ -48,7 +48,6 @@ class LoginFragment : Fragment() {
                             email = email,
                         )
                     ).observe(viewLifecycleOwner) {
-                        Toast.makeText(requireContext(), "Success:${it}", Toast.LENGTH_LONG).show()
                         (activity as AuthActivity).directToMainActivity()
                     }
                 }

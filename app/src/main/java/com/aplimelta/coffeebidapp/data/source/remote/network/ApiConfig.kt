@@ -1,5 +1,6 @@
 package com.aplimelta.coffeebidapp.data.source.remote.network
 
+import android.util.Log
 import com.aplimelta.coffeebidapp.BuildConfig
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -8,9 +9,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiConfig {
     fun getApiServices(): ApiServices {
-        val loggingInterceptor =
-            if (BuildConfig.DEBUG) HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
-            else HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE)
+        val loggingInterceptor = HttpLoggingInterceptor { Log.d("OkHttp", it) }
+
+        loggingInterceptor.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
+            else HttpLoggingInterceptor.Level.NONE
 
         val client = OkHttpClient.Builder().apply {
             addInterceptor(loggingInterceptor)
