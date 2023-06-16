@@ -14,6 +14,7 @@ import com.aplimelta.coffeebidapp.data.source.remote.request.SignUpRequest
 import com.aplimelta.coffeebidapp.databinding.FragmentRegisterBinding
 import com.aplimelta.coffeebidapp.ui.MainViewModel
 import com.aplimelta.coffeebidapp.ui.ViewModelFactory
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class RegisterFragment : Fragment() {
 
@@ -79,12 +80,17 @@ class RegisterFragment : Fragment() {
 
                             is Result.Success -> {
                                 binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
-                                Toast.makeText(
-                                    requireContext(),
-                                    result.data,
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                findNavController().navigate(R.id.login_navigation)
+                                MaterialAlertDialogBuilder(requireContext()).apply {
+                                    setTitle("Akun Anda telah berhasil dibuat")
+                                    setMessage("Silahkan login untuk melanjutkan ke halaman utama aplikasi")
+                                    setNegativeButton("Batalkan") { dialog, _ ->
+                                        dialog.cancel()
+                                    }
+                                    setPositiveButton("Ya") { _, _ ->
+                                        findNavController().navigate(R.id.login_navigation)
+                                    }
+                                    show()
+                                }
                             }
                         }
                     }

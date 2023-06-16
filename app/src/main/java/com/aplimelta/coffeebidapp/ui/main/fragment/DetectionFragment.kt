@@ -48,16 +48,19 @@ class DetectionFragment : Fragment() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = it.data?.getStringExtra("picture") as String
+            val myFile = it.data?.getStringExtra("picture")
             Log.d("Detection", "dalam myfile $myFile")
 
-            myFile.let { file ->
-                getFile = file
-                binding?.sivPhotoPreview?.load(file)
-                Log.d("Detection", getFile as String)
+            if (myFile != null) {
+                getFile = myFile
 
-                binding?.btnUpload?.setOnClickListener { predictQuality(getFile as String) }
-                binding?.btnRosting?.setOnClickListener { predictRoast(getFile as String) }
+                binding?.apply {
+                    sivPhotoPreview.load(myFile)
+                    btnQuality.isEnabled = true
+                    btnRoasting.isEnabled = true
+                    btnQuality.setOnClickListener { predictQuality(getFile as String) }
+                    btnRoasting.setOnClickListener { predictRoast(getFile as String) }
+                }
             }
 
 //            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
@@ -100,16 +103,16 @@ class DetectionFragment : Fragment() {
 
             binding?.apply {
                 btnCamera.setOnClickListener { cameraX() }
-                Log.d("Detection", "onViewCreated: $getFile")
-
-                if (getFile != null) {
-
-                    btnUpload.setOnClickListener { predictQuality(getFile as String) }
-                    btnRosting.setOnClickListener { predictRoast(getFile as String) }
-                } else {
-                    Toast.makeText(requireActivity(), "Upload Image Failed", Toast.LENGTH_LONG)
-                        .show()
-                }
+//                Log.d("Detection", "onViewCreated: $getFile")
+//
+//                if (getFile != null) {
+//
+//                    btnUpload.setOnClickListener { predictQuality(getFile as String) }
+//                    btnRosting.setOnClickListener { predictRoast(getFile as String) }
+//                } else {
+//                    Toast.makeText(requireActivity(), "Upload Image Failed", Toast.LENGTH_LONG)
+//                        .show()
+//                }
             }
         }
     }
@@ -129,7 +132,7 @@ class DetectionFragment : Fragment() {
                         "Berhasil Upload Image ${result.data}",
                         Toast.LENGTH_LONG
                     ).show()
-                    binding?.tvInfoDetection?.text = result.data
+                    binding?.infoDetectionResult?.text = result.data
                     binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
                 }
 
@@ -155,7 +158,7 @@ class DetectionFragment : Fragment() {
                         "Berhasil Upload Image ${result.data}",
                         Toast.LENGTH_LONG
                     ).show()
-                    binding?.tvInfoDetection?.text = result.data
+                    binding?.infoDetectionResult?.text = result.data
                     binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
                 }
 

@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.aplimelta.coffeebidapp.R
 import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.databinding.FragmentProfileBinding
 import com.aplimelta.coffeebidapp.ui.MainViewModel
 import com.aplimelta.coffeebidapp.ui.ViewModelFactory
 import com.aplimelta.coffeebidapp.ui.auth.activity.AuthActivity
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class ProfileFragment : Fragment() {
 
@@ -47,7 +49,8 @@ class ProfileFragment : Fragment() {
                             ).show()
                         }
 
-                        Result.Loading -> binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                        Result.Loading -> binding?.progressBar?.progressBar?.visibility =
+                            View.VISIBLE
 
 
                         is Result.Success -> {
@@ -62,10 +65,21 @@ class ProfileFragment : Fragment() {
                 }
 
                 actionLogout.setOnClickListener {
-                    viewModel.logout.observe(viewLifecycleOwner) {
-                        Toast.makeText(requireActivity(), it, Toast.LENGTH_LONG).show()
-                        startActivity(Intent(requireActivity(), AuthActivity::class.java))
-                        requireActivity().finish()
+                    MaterialAlertDialogBuilder(requireContext()).apply {
+                        setTitle("Yakin ingin keluar?")
+                        setMessage("Kamu butuh login kembali jika telah keluar")
+                        setNegativeButton("Batalkan") { dialog, _ ->
+                            dialog.cancel()
+                        }
+                        setPositiveButton(R.string.logout) { _, _ ->
+                            viewModel.logout.observe(viewLifecycleOwner) {
+                                val intent = Intent(requireActivity(), AuthActivity::class.java)
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+                                startActivity(intent)
+                                requireActivity().finish()
+                            }
+                        }
+                        show()
                     }
                 }
             }
