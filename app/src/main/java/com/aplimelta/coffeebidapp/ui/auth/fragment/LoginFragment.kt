@@ -85,15 +85,15 @@ class LoginFragment : Fragment() {
 
     private fun playAnimation() {
         val titleHero =
-            ObjectAnimator.ofFloat(binding?.tvTitleLogin, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.tvTitleLogin, View.ALPHA, 1F).setDuration(300)
         val subTitleHero =
-            ObjectAnimator.ofFloat(binding?.tvSubtitleLogin, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.tvSubtitleLogin, View.ALPHA, 1F).setDuration(300)
         val etEmail =
-            ObjectAnimator.ofFloat(binding?.cetLoginEmail, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.cetLoginEmail, View.ALPHA, 1F).setDuration(300)
         val etPassword =
-            ObjectAnimator.ofFloat(binding?.cetLoginPassword, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.cetLoginPassword, View.ALPHA, 1F).setDuration(300)
         val btnLogin =
-            ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, 1F).setDuration(300)
 
         AnimatorSet().apply {
             playSequentially(
@@ -103,7 +103,7 @@ class LoginFragment : Fragment() {
                 etPassword,
                 btnLogin
             )
-            startDelay = 500
+            startDelay = 300
             start()
         }
     }

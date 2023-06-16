@@ -56,15 +56,15 @@ class AuthActivity : AppCompatActivity() {
 
     private fun playAnimation() {
         val accountAuth =
-            ObjectAnimator.ofFloat(binding.authFooter.tvInfoAuth, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding.authFooter.tvInfoAuth, View.ALPHA, 1F).setDuration(300)
         val btnAuth =
-            ObjectAnimator.ofFloat(binding.authFooter.btnRegister, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding.authFooter.btnRegister, View.ALPHA, 1F).setDuration(300)
 
         AnimatorSet().apply {
             playSequentially(
                 accountAuth, btnAuth
             )
-            startDelay = 500
+            startDelay = 300
             start()
         }
     }

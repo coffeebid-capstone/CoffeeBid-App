@@ -105,26 +105,26 @@ class RegisterFragment : Fragment() {
 
     private fun playAnimation() {
         val titleHero =
-            ObjectAnimator.ofFloat(binding?.tvTitleRegister, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.tvTitleRegister, View.ALPHA, 1F).setDuration(300)
         val subTitleHero =
-            ObjectAnimator.ofFloat(binding?.tvSubtitleRegister, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.tvSubtitleRegister, View.ALPHA, 1F).setDuration(300)
         val etName =
-            ObjectAnimator.ofFloat(binding?.cetRegisterName, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.cetRegisterName, View.ALPHA, 1F).setDuration(300)
         val etEmail =
-            ObjectAnimator.ofFloat(binding?.cetRegisterEmail, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.cetRegisterEmail, View.ALPHA, 1F).setDuration(300)
         val etPassword =
-            ObjectAnimator.ofFloat(binding?.cetRegisterPassword, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.cetRegisterPassword, View.ALPHA, 1F).setDuration(300)
         val etPasswordConfirm =
             ObjectAnimator.ofFloat(binding?.cetRegisterPasswordConfirm, View.ALPHA, 1F)
-                .setDuration(500)
+                .setDuration(300)
         val etAddress =
             ObjectAnimator.ofFloat(binding?.cetRegisterAddress, View.ALPHA, 1F)
-                .setDuration(500)
+                .setDuration(300)
         val etPhone =
             ObjectAnimator.ofFloat(binding?.cetRegisterPhone, View.ALPHA, 1F)
-                .setDuration(500)
+                .setDuration(300)
         val btnRegister =
-            ObjectAnimator.ofFloat(binding?.btnRegister, View.ALPHA, 1F).setDuration(500)
+            ObjectAnimator.ofFloat(binding?.btnRegister, View.ALPHA, 1F).setDuration(300)
 
         AnimatorSet().apply {
             playSequentially(
@@ -138,7 +138,7 @@ class RegisterFragment : Fragment() {
                 etPhone,
                 btnRegister
             )
-            startDelay = 500
+            startDelay = 300
             start()
         }
     }
