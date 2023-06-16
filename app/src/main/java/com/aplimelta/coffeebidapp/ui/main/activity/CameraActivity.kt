@@ -27,6 +27,7 @@ import com.aplimelta.coffeebidapp.ui.ViewModelFactory
 import com.aplimelta.coffeebidapp.ui.main.fragment.DetectionFragment.Companion.CAMERA_X_RESULT
 import com.aplimelta.coffeebidapp.utils.createFile
 import com.aplimelta.coffeebidapp.utils.reduceFileImage
+import com.aplimelta.coffeebidapp.utils.rotateFile
 import java.nio.ByteBuffer
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -148,11 +149,7 @@ class CameraActivity : AppCompatActivity() {
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
 //                    val savedUri = Uri.fromFile(file)
-                    Toast.makeText(
-                        this@CameraActivity,
-                        "Berhasil simpan gambar $photoFile",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    rotateFile(photoFile, cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA)
                     val image = reduceFileImage(photoFile)
                     viewModel.image(image).observe(this@CameraActivity) { result ->
                         when (result) {
@@ -173,10 +170,6 @@ class CameraActivity : AppCompatActivity() {
                                 ).show()
                                 val intent = Intent()
                                 intent.putExtra("picture", result.data.image)
-//                                    intent.putExtra(
-//                                        "isBackCamera",
-//                                        cameraSelector == CameraSelector.DEFAULT_BACK_CAMERA
-//                                    )
                                 setResult(CAMERA_X_RESULT, intent)
                                 finish()
                             }
