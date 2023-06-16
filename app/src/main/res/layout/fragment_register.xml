@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:auth="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".ui.auth.fragment.RegisterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="100dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/siv_coffeebid_logo"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:src="@drawable/coffeebid_logo"
+            app:civ_border_color="?attr/colorPrimary"
+            app:civ_border_width="1dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".1" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_title_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:alpha="0"
+            android:text="@string/title_register"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/siv_coffeebid_logo" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_subtitle_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:alpha="0"
+            android:text="@string/subtitle_auth"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_register" />
+
+        <include
+            android:id="@+id/progress_bar"
+            layout="@layout/circular_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_register" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_name"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginTop="16dp"
+            android:alpha="0"
+            android:autofillHints="Name"
+            android:hint="@string/prompt_name"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
+            auth:name="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_email"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:autofillHints="Email"
+            android:hint="@string/prompt_email"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_name"
+            auth:email="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_password"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:autofillHints="Password"
+            android:hint="@string/prompt_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_email"
+            auth:password="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_password_confirm"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:autofillHints="Password Confirm"
+            android:hint="@string/prompt_confirm_password"
+            android:imeOptions="actionNext"
+            android:inputType="textPassword"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_password"
+            auth:password="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_address"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:autofillHints="Address"
+            android:hint="@string/prompt_address"
+            android:imeOptions="actionNext"
+            android:inputType="textPostalAddress"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_password_confirm"
+            auth:address="true" />
+
+        <com.aplimelta.coffeebidapp.customview.CoffeeEditText
+            android:id="@+id/cet_register_phone"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="8dp"
+            android:alpha="0"
+            android:autofillHints="Phone"
+            android:hint="@string/prompt_phone"
+            android:imeOptions="actionDone"
+            android:inputType="phone"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorOnSurface"
+            android:textColorHint="?attr/colorOnSurfaceVariant"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_address"
+            auth:phone="true" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_register"
+            android:layout_width="0dp"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginTop="20dp"
+            android:alpha="0"
+            android:text="@string/register"
+            android:textColor="?attr/colorOnSurface"
+            app:layout_constraintEnd_toEndOf="@id/cet_register_name"
+            app:layout_constraintStart_toStartOf="@id/cet_register_name"
+            app:layout_constraintTop_toBottomOf="@id/cet_register_phone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

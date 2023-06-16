@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.main.fragment.DetailFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            style="?attr/collapsingToolbarLayoutLargeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
+            app:collapsedTitleTextAppearance="@style/TextAppearance.Material3.ActionBar.Title"
+            app:contentScrim="?attr/colorOnPrimary"
+            app:expandedTitleGravity="center|bottom"
+            app:expandedTitleMarginBottom="28dp"
+            app:expandedTitleTextAppearance="@style/TextAppearance.Material3.DisplaySmall"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:elevation="0dp"
+                android:theme="@style/ThemeOverlay.Material3.DynamicColors.Light"
+                app:layout_collapseMode="pin"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:popupTheme="@style/ThemeOverlay.Material3.DynamicColors.Dark"
+                app:title="Detail Informasi" />
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/siv_detail_photo"
+                android:layout_width="0dp"
+                android:layout_height="400dp"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="24dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.CoffeeBidApp.CornerSizeImageDetail"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <include
+                android:id="@+id/auction_detail"
+                layout="@layout/auction_detail_specification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@id/siv_detail_photo"
+                app:layout_constraintStart_toStartOf="@id/siv_detail_photo"
+                app:layout_constraintTop_toBottomOf="@id/siv_detail_photo" />
+
+            <include
+                android:id="@+id/product_detail"
+                layout="@layout/product_detail_specification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@id/siv_detail_photo"
+                app:layout_constraintStart_toStartOf="@id/siv_detail_photo"
+                app:layout_constraintTop_toBottomOf="@id/auction_detail" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_detail_auction"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="20dp"
+                android:text="Ikuti lelang"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/siv_detail_photo"
+                app:layout_constraintStart_toStartOf="@id/siv_detail_photo"
+                app:layout_constraintTop_toBottomOf="@+id/product_detail" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

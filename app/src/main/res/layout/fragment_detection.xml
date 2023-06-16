@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.main.fragment.DetectionFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.Material3.DynamicColors.Light"
+            app:popupTheme="@style/ThemeOverlay.Material3.DynamicColors.Dark"
+            app:title="Fitur Deteksi" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="true"
+            android:paddingBottom="100dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/siv_photo_preview"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="28dp"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.CoffeeBidApp.CornerSizeImageDetail"
+                app:srcCompat="@drawable/ic_bg_preview_image" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/info_detection_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@id/siv_photo_preview" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/info_detection_features"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Pilih Fitur Deteksi"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@id/info_detection_result" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_camera"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="14dp"
+                android:text="Buka Kamera"
+                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@+id/btn_quality" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_quality"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="14dp"
+                android:layout_marginEnd="10dp"
+                android:enabled="false"
+                android:text="Deteksi Kualitas"
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@+id/info_detection_features" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_roasting"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="10dp"
+                android:enabled="false"
+                android:text="Deteksi Roasting"
+                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
+                app:layout_constraintStart_toStartOf="@id/guideline"
+                app:layout_constraintTop_toTopOf="@+id/btn_quality" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent=".5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/linear_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
