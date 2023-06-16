@@ -3,6 +3,7 @@ package com.aplimelta.coffeebidapp.ui.main.activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -27,6 +28,21 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
         ViewModelFactory.getInstance(this)
     }
+
+    private val onBackPressedCallback: OnBackPressedCallback =
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                when (navController.currentDestination?.id) {
+                    R.id.home_navigation -> {
+                        finish()
+                    }
+
+                    else -> {
+                        navController.popBackStack()
+                    }
+                }
+            }
+        }
 
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -62,6 +78,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.mainBottomNavigation.setupWithNavController(navController)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     fun setupToolbar(toolbar: MaterialToolbar?) {
