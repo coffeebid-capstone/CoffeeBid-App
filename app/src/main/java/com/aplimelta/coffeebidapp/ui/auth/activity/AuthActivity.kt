@@ -5,10 +5,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.WindowInsets
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavOptions
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.aplimelta.coffeebidapp.R
 import com.aplimelta.coffeebidapp.databinding.ActivityAuthBinding
@@ -32,7 +29,8 @@ class AuthActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.login_navigation -> {
-                    binding.authFooter.tvInfoAuth.text = resources.getString(R.string.don_t_have_an_account_yet)
+                    binding.authFooter.tvInfoAuth.text =
+                        resources.getString(R.string.don_t_have_an_account_yet)
                     binding.authFooter.btnRegister.text = resources.getString(R.string.sign_up)
                     binding.authFooter.btnRegister.setOnClickListener {
                         navController.navigate(R.id.register_navigation)
@@ -40,7 +38,8 @@ class AuthActivity : AppCompatActivity() {
                 }
 
                 else -> {
-                    binding.authFooter.tvInfoAuth.text = resources.getString(R.string.already_have_an_account)
+                    binding.authFooter.tvInfoAuth.text =
+                        resources.getString(R.string.already_have_an_account)
                     binding.authFooter.btnRegister.text = resources.getString(R.string.sign_in)
                     binding.authFooter.btnRegister.setOnClickListener {
                         navController.navigate(R.id.login_navigation)
@@ -51,7 +50,9 @@ class AuthActivity : AppCompatActivity() {
     }
 
     fun directToMainActivity() {
-        startActivity(Intent(this@AuthActivity, MainActivity::class.java))
+        val intent = Intent(this@AuthActivity, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
     }
 
     private fun hideSystemUI() {
