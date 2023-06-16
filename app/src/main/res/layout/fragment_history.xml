@@ -33,7 +33,8 @@
             android:layout_gravity="center"
             android:text="Fitur belum tersedia"
             android:textAlignment="center"
-            android:textSize="48sp"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
     </FrameLayout>
