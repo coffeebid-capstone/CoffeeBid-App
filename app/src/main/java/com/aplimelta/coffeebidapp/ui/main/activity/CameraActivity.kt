@@ -258,6 +258,8 @@ class CameraActivity : AppCompatActivity() {
         }
 
         override fun analyze(image: ImageProxy) {
+            val buffer = image.planes[0].buffer
+            val data = buffer.toByteArray()
 
 
             listener(image)
