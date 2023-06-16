@@ -13,6 +13,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.widget.doOnTextChanged
 import com.aplimelta.coffeebidapp.R
+import com.aplimelta.coffeebidapp.utils.isValidEmail
 
 class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
 
@@ -87,11 +88,11 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
 
         doOnTextChanged { text, _, _, _ ->
             error = when {
-                isEmail && text.toString().isEmpty() -> {
+                isEmail && !text.toString().isValidEmail() -> {
                     resources.getString(R.string.error_email)
                 }
 
-                isPassword && text.toString().isEmpty() && text.toString().length < 8 -> {
+                isPassword && text.toString().length < 8 -> {
                     resources.getString(R.string.error_password)
                 }
 
@@ -162,7 +163,7 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
                         (mPasswordDrawableSelector.intrinsicWidth + v.paddingStart).toFloat()
 
                     when {
-                        event.x > clearDrawableEnd -> isEndDrawableClicked = true
+                        event.x < clearDrawableEnd -> isEndDrawableClicked = true
                     }
                 } else {
                     clearDrawableStart =
@@ -198,7 +199,6 @@ class CoffeeEditText : AppCompatEditText, View.OnTouchListener {
                                     }
                                     true
                                 }
-
                                 else -> false
                             }
                         }

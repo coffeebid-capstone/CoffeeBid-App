@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.databinding.FragmentProfileBinding
 import com.aplimelta.coffeebidapp.ui.MainViewModel
 import com.aplimelta.coffeebidapp.ui.ViewModelFactory
@@ -19,7 +20,7 @@ class ProfileFragment : Fragment() {
     private val binding get() = _binding
 
     private val viewModel: MainViewModel by activityViewModels {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -36,9 +37,27 @@ class ProfileFragment : Fragment() {
         if (activity != null) {
             binding?.apply {
                 viewModel.profile.observe(viewLifecycleOwner) { result ->
-                    if (result != null) run {
-                        tvProfileName.text = result.username
-                        tvProfileEmail.text = result.email
+                    when (result) {
+                        is Result.Error -> {
+                            binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                            Toast.makeText(
+                                requireActivity(),
+                                result.message,
+                                Toast.LENGTH_LONG
+                            ).show()
+                        }
+
+                        Result.Loading -> binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+
+
+                        is Result.Success -> {
+                            binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                            val data = result.data
+                            if (data != null) {
+                                tvProfileName.text = data.username
+                                tvProfileEmail.text = data.email
+                            }
+                        }
                     }
                 }
 

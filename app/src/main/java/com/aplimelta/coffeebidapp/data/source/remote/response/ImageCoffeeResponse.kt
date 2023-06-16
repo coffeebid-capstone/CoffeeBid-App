@@ -4,6 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class ImageCoffeeResponse(
 
-	@field:SerializedName("image")
+	@field:SerializedName("imageUrl")
 	val image: String
 )

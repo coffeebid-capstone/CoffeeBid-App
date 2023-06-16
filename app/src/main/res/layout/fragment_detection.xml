@@ -8,6 +8,7 @@
     tools:context=".ui.main.fragment.DetectionFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -26,19 +27,33 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true">
+            android:nestedScrollingEnabled="true"
+            android:paddingBottom="100dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/siv_photo_preview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="28dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                app:shapeAppearance="@style/ShapeAppearanceOverlay.CoffeeBidApp.CornerSizeImageDetail"
+                app:srcCompat="@drawable/ic_bg_preview_image" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_info_detection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/siv_photo_preview" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_info_photo"
@@ -50,7 +65,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
-                app:layout_constraintTop_toBottomOf="@+id/siv_photo_preview" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_info_detection" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_camera"
@@ -62,8 +77,37 @@
                 app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
                 app:layout_constraintTop_toBottomOf="@+id/tv_info_photo" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_upload"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="14dp"
+                android:text="Deteksi Kualitas"
+                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@+id/btn_camera" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_rosting"
+                android:layout_width="0dp"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginTop="14dp"
+                android:text="Deteksi Rosting"
+                app:layout_constraintEnd_toEndOf="@id/siv_photo_preview"
+                app:layout_constraintStart_toStartOf="@id/siv_photo_preview"
+                app:layout_constraintTop_toBottomOf="@+id/btn_upload" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/linear_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

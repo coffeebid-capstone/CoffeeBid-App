@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.data.source.remote.request.SignInRequest
+import com.aplimelta.coffeebidapp.data.source.remote.response.ProfileResponse
 import com.aplimelta.coffeebidapp.databinding.FragmentLoginBinding
 import com.aplimelta.coffeebidapp.ui.MainViewModel
 import com.aplimelta.coffeebidapp.ui.ViewModelFactory
@@ -19,7 +21,7 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding
 
     private val viewModel: MainViewModel by activityViewModels {
-        ViewModelFactory.getInstance()
+        ViewModelFactory.getInstance(requireContext())
     }
 
     override fun onCreateView(
@@ -47,8 +49,31 @@ class LoginFragment : Fragment() {
                             password = password,
                             email = email,
                         )
-                    ).observe(viewLifecycleOwner) {
-                        (activity as AuthActivity).directToMainActivity()
+                    ).observe(viewLifecycleOwner) { result ->
+                        when (result) {
+                            is Result.Error -> {
+                                binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                                Toast.makeText(
+                                    requireContext(),
+                                    result.message,
+                                    Toast.LENGTH_LONG
+                                ).show()
+                            }
+
+                            is Result.Success -> {
+                                binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                                Toast.makeText(
+                                    requireContext(),
+                                    "${result.data}",
+                                    Toast.LENGTH_LONG
+                                ).show()
+                                (activity as AuthActivity).directToMainActivity()
+                            }
+
+                            else -> {
+                                binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                            }
+                        }
                     }
                 }
             }

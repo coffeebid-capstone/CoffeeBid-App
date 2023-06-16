@@ -17,5 +17,14 @@
         <item name="android:minHeight">75dp</item>
         <item name="iconSize">48dp</item>
     </style>
+    
+    <style name="ShapeAppearanceOverlay.CoffeeBidApp.CornerSizeImageDetail" parent="">
+        <item name="cornerSize">25%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.CoffeeBidApp.CornerLargeComponent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">100dp</item>
+    </style>
 
 </resources>

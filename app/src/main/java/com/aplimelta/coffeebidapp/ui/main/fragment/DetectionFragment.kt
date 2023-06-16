@@ -3,9 +3,9 @@ package com.aplimelta.coffeebidapp.ui.main.fragment
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,17 +14,24 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.databinding.FragmentDetectionBinding
+import com.aplimelta.coffeebidapp.ui.MainViewModel
+import com.aplimelta.coffeebidapp.ui.ViewModelFactory
 import com.aplimelta.coffeebidapp.ui.main.activity.CameraActivity
-import com.aplimelta.coffeebidapp.utils.rotateFile
-import java.io.File
+import com.aplimelta.coffeebidapp.utils.load
 
 class DetectionFragment : Fragment() {
 
     private var _binding: FragmentDetectionBinding? = null
     private val binding get() = _binding
 
-    private var getFile: File? = null
+    private var getFile: String? = null
+
+    private val viewModel: MainViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     private val launcherRequestPermission = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
@@ -41,22 +48,39 @@ class DetectionFragment : Fragment() {
         ActivityResultContracts.StartActivityForResult()
     ) {
         if (it.resultCode == CAMERA_X_RESULT) {
-            val myFile = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                it.data?.getSerializableExtra("picture", File::class.java)
-            } else {
-                @Suppress("DEPRECATION")
-                (it.data?.getSerializableExtra("picture"))
-            } as File
-
-            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+            val myFile = it.data?.getStringExtra("picture") as String
+            Log.d("Detection", "dalam myfile $myFile")
 
             myFile.let { file ->
-                rotateFile(file, isBackCamera)
                 getFile = file
-                binding?.sivPhotoPreview?.setImageBitmap(BitmapFactory.decodeFile(file.path))
+                binding?.sivPhotoPreview?.load(file)
+                Log.d("Detection", getFile as String)
+
+                binding?.btnUpload?.setOnClickListener { predictQuality(getFile as String) }
+                binding?.btnRosting?.setOnClickListener { predictRoast(getFile as String) }
             }
+
+//            val isBackCamera = it.data?.getBooleanExtra("isBackCamera", true) as Boolean
+
+//            myFile.let { file ->
+//                rotateFile(file, isBackCamera)
+//                getFile = reduceFileImage(file)
+//                binding?.sivPhotoPreview?.setImageBitmap(BitmapFactory.decodeFile(file.path))
+//            }
         }
     }
+
+//    private val launcherIntentGallery = registerForActivityResult(
+//        ActivityResultContracts.StartActivityForResult()
+//    ) {
+//        if (it.resultCode == AppCompatActivity.RESULT_OK) {
+//            val selectedImg: Uri = it.data?.data as Uri
+//            val myFile = uriToFile(selectedImg, requireActivity())
+//
+//            getFile = myFile
+//            binding?.sivPhotoPreview?.setImageURI(selectedImg)
+//        }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,12 +94,74 @@ class DetectionFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         if (activity != null) {
-            if (!allPermissionsGranted()) {
-                makePermission()
-            }
+//            if (!allPermissionsGranted()) {
+//                makePermission()
+//            }
 
             binding?.apply {
                 btnCamera.setOnClickListener { cameraX() }
+                Log.d("Detection", "onViewCreated: $getFile")
+
+                if (getFile != null) {
+
+                    btnUpload.setOnClickListener { predictQuality(getFile as String) }
+                    btnRosting.setOnClickListener { predictRoast(getFile as String) }
+                } else {
+                    Toast.makeText(requireActivity(), "Upload Image Failed", Toast.LENGTH_LONG)
+                        .show()
+                }
+            }
+        }
+    }
+
+    private fun predictRoast(file: String) {
+        viewModel.predictRoast(file).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Error -> {
+                    binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                    Toast.makeText(requireActivity(), result.message, Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                is Result.Success -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        "Berhasil Upload Image ${result.data}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    binding?.tvInfoDetection?.text = result.data
+                    binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                }
+
+                else -> {
+                    binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                }
+            }
+        }
+    }
+
+    private fun predictQuality(file: String) {
+        viewModel.predictQuality(file).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Error -> {
+                    binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                    Toast.makeText(requireActivity(), result.message, Toast.LENGTH_LONG)
+                        .show()
+                }
+
+                is Result.Success -> {
+                    Toast.makeText(
+                        requireActivity(),
+                        "Berhasil Upload Image ${result.data}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    binding?.tvInfoDetection?.text = result.data
+                    binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                }
+
+                else -> {
+                    binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                }
             }
         }
     }
@@ -106,13 +192,15 @@ class DetectionFragment : Fragment() {
     companion object {
         const val CAMERA_X_RESULT = 200
 
-        private val REQUIRED_PERMISSION = mutableListOf(
+        val REQUEST_CODE_PERMISSION = 10
+        val REQUIRED_PERMISSION = mutableListOf(
             Manifest.permission.CAMERA
         ).apply {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
                 add(Manifest.permission.WRITE_EXTERNAL_STORAGE)
             }
         }.toTypedArray()
-        private val MAKE_REQUIRED_PERMISSION = arrayOf(Manifest.permission.CAMERA)
+        val MAKE_REQUIRED_PERMISSION =
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
     }
 }

@@ -8,12 +8,17 @@
     tools:context=".ui.main.fragment.ProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            android:theme="@style/ThemeOverlay.Material3.DynamicColors.Light"
+            app:popupTheme="@style/ThemeOverlay.Material3.DynamicColors.Dark"
             app:title="@string/profile" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -43,10 +48,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_profile_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="john@gmail.com"
-                android:id="@+id/tv_profile_email"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -77,67 +82,75 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider" />
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/siv_item_location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@drawable/ic_location_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_profile_about" />
+            <!--            <com.google.android.material.imageview.ShapeableImageView-->
+            <!--                android:id="@+id/siv_item_location"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginTop="16dp"-->
+            <!--                android:background="@drawable/ic_location_24"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/tv_profile_about" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_location"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:text="Semarang"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/siv_item_location"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/siv_item_location"
-                app:layout_constraintTop_toTopOf="@id/siv_item_location" />
+            <!--            <com.google.android.material.textview.MaterialTextView-->
+            <!--                android:id="@+id/tv_item_location"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:ellipsize="end"-->
+            <!--                android:gravity="center_vertical"-->
+            <!--                android:text="Semarang"-->
+            <!--                android:textSize="14sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/siv_item_location"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/siv_item_location"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/siv_item_location" />-->
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/siv_item_phone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/ic_phone_24"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/siv_item_location" />
+            <!--            <com.google.android.material.imageview.ShapeableImageView-->
+            <!--                android:id="@+id/siv_item_phone"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:layout_marginTop="14dp"-->
+            <!--                android:background="@drawable/ic_phone_24"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/siv_item_location" />-->
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_phone"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:ellipsize="end"
-                android:gravity="center_vertical"
-                android:text="08526738362"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@id/siv_item_phone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/siv_item_phone"
-                app:layout_constraintTop_toTopOf="@id/siv_item_phone" />
+            <!--            <com.google.android.material.textview.MaterialTextView-->
+            <!--                android:id="@+id/tv_item_phone"-->
+            <!--                android:layout_width="0dp"-->
+            <!--                android:layout_height="0dp"-->
+            <!--                android:layout_marginStart="16dp"-->
+            <!--                android:ellipsize="end"-->
+            <!--                android:gravity="center_vertical"-->
+            <!--                android:text="08526738362"-->
+            <!--                android:textSize="14sp"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@id/siv_item_phone"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                app:layout_constraintStart_toEndOf="@id/siv_item_phone"-->
+            <!--                app:layout_constraintTop_toTopOf="@id/siv_item_phone" />-->
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/action_logout"
-                style="@style/Widget.Material3.Button.TextButton"
-                android:layout_width="0dp"
+                android:layout_width="350dp"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
                 android:text="Logout"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/siv_item_phone"
-                app:layout_constraintTop_toBottomOf="@id/siv_item_phone" />
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <include
+        android:id="@+id/progress_bar"
+        layout="@layout/linear_progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_anchor="@id/app_bar_layout"
+        app:layout_anchorGravity="bottom" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

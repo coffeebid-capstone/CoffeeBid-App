@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.aplimelta.coffeebidapp.data.source.remote.response.ProductResponseItem
+import com.aplimelta.coffeebidapp.data.source.model.ProductModel
 import com.aplimelta.coffeebidapp.databinding.ItemRowCoffeebidBinding
+import com.aplimelta.coffeebidapp.utils.load
 
-class CoffeeAdapter : ListAdapter<ProductResponseItem, CoffeeAdapter.CoffeeViewHolder>(
+class CoffeeAdapter : ListAdapter<ProductModel, CoffeeAdapter.CoffeeViewHolder>(
     CoffeeAdapterComparator()
 ) {
 
@@ -19,29 +20,33 @@ class CoffeeAdapter : ListAdapter<ProductResponseItem, CoffeeAdapter.CoffeeViewH
     }
 
     interface OnItemClickCallback {
-        fun onItemClicked(productId: Int)
+        fun onItemClicked(product: ProductModel)
     }
 
     inner class CoffeeViewHolder(private val binding: ItemRowCoffeebidBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: ProductResponseItem) {
+        fun bind(item: ProductModel) {
             binding.apply {
+                tvItemTitle.text = item.name
+                tvItemPrice.text = item.openPrice.toString()
+                tvItemDate.text = item.startDate
 
+                sivItemPhoto.load(item.productPict.toString())
             }
         }
     }
 
-    class CoffeeAdapterComparator : DiffUtil.ItemCallback<ProductResponseItem>() {
+    class CoffeeAdapterComparator : DiffUtil.ItemCallback<ProductModel>() {
         override fun areItemsTheSame(
-            oldItem: ProductResponseItem,
-            newItem: ProductResponseItem,
+            oldItem: ProductModel,
+            newItem: ProductModel,
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: ProductResponseItem,
-            newItem: ProductResponseItem,
+            oldItem: ProductModel,
+            newItem: ProductModel,
         ): Boolean {
             return oldItem == newItem
         }
@@ -61,7 +66,7 @@ class CoffeeAdapter : ListAdapter<ProductResponseItem, CoffeeAdapter.CoffeeViewH
             holder.bind(currentItem)
 
             holder.itemView.setOnClickListener {
-                onItemClickCallback.onItemClicked(currentItem.id)
+                onItemClickCallback.onItemClicked(currentItem)
             }
         }
     }

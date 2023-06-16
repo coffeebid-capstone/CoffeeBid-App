@@ -52,21 +52,32 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_title_login" />
 
+        <include
+            android:id="@+id/progress_bar"
+            layout="@layout/circular_progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_login" />
+
         <com.aplimelta.coffeebidapp.customview.CoffeeEditText
             android:id="@+id/cet_login_email"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginHorizontal="32dp"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="16dp"
+            android:autofillHints="Email"
             android:gravity="center_vertical"
             android:hint="Masukkan email"
-            android:autofillHints="Email"
             android:imeOptions="actionNext"
             android:inputType="text"
             android:selectAllOnFocus="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_subtitle_login"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
             auth:email="true" />
 
         <com.aplimelta.coffeebidapp.customview.CoffeeEditText
@@ -74,8 +85,8 @@
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
             android:layout_marginTop="8dp"
-            android:hint="Masukkan password"
             android:autofillHints="Password"
+            android:hint="Masukkan password"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:selectAllOnFocus="true"

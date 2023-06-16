@@ -1,10 +1,11 @@
 package com.aplimelta.coffeebidapp.ui.main.fragment
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.aplimelta.coffeebidapp.databinding.FragmentHistoryBinding
 
 class HistoryFragment : Fragment() {
@@ -17,6 +18,7 @@ class HistoryFragment : Fragment() {
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentHistoryBinding.inflate(inflater, container, false)
+        (activity as AppCompatActivity).setSupportActionBar(binding?.toolbar)
         return binding?.root
     }
 

@@ -1,5 +1,6 @@
 package com.aplimelta.coffeebidapp.ui
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.aplimelta.coffeebidapp.data.source.AuthRepository
@@ -20,9 +21,9 @@ class ViewModelFactory private constructor(private val repository: AuthRepositor
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
 
-        fun getInstance() =
+        fun getInstance(context: Context) =
             INSTANCE ?: synchronized(this) {
-                INSTANCE ?: ViewModelFactory(Injection.provideRepository())
+                INSTANCE ?: ViewModelFactory(Injection.provideRepository(context))
             }.also { INSTANCE = it }
     }
 }

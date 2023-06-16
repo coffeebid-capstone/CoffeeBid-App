@@ -9,12 +9,20 @@
         android:id="@+id/home_navigation"
         android:name="com.aplimelta.coffeebidapp.ui.main.fragment.HomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_home_navigation_to_detail_navigation"
+            app:destination="@id/detail_navigation" />
+    </fragment>
     <fragment
         android:id="@+id/detection_navigation"
         android:name="com.aplimelta.coffeebidapp.ui.main.fragment.DetectionFragment"
         android:label="Detection"
-        tools:layout="@layout/fragment_detection" />
+        tools:layout="@layout/fragment_detection" >
+        <argument
+            android:name="image"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/history_navigation"
         android:name="com.aplimelta.coffeebidapp.ui.main.fragment.HistoryFragment"
@@ -25,4 +33,22 @@
         android:name="com.aplimelta.coffeebidapp.ui.main.fragment.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/detail_navigation"
+        android:name="com.aplimelta.coffeebidapp.ui.main.fragment.DetailFragment"
+        android:label="Detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="product"
+            app:argType="com.aplimelta.coffeebidapp.data.source.model.ProductModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/camera_navigation"
+        android:name="com.aplimelta.coffeebidapp.ui.main.fragment.CameraFragment"
+        android:label="Camera"
+        tools:layout="@layout/fragment_camera" >
+        <action
+            android:id="@+id/action_camera_navigation_to_detection_navigation"
+            app:destination="@id/detection_navigation" />
+    </fragment>
 </navigation>
