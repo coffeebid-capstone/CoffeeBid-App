@@ -260,7 +260,8 @@ class CameraActivity : AppCompatActivity() {
         override fun analyze(image: ImageProxy) {
             val buffer = image.planes[0].buffer
             val data = buffer.toByteArray()
-
+            val pixels = data.map { it.toInt() and 0xFF }
+            val coffee = pixels.average()
 
             listener(image)
             image.close()

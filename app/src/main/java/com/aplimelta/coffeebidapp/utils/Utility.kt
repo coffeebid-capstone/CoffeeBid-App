@@ -62,24 +62,6 @@ fun rotateFile(file: File, isBackCamera: Boolean = false) {
     result.compress(Bitmap.CompressFormat.JPEG, 100, FileOutputStream(file))
 }
 
-fun uriToFile(selectedImg: Uri, context: Context): File {
-    val contentResolver: ContentResolver = context.contentResolver
-    val myFile = createCustomTempFile(context)
-
-    val inputStream = contentResolver.openInputStream(selectedImg) as InputStream
-    val outputStream = FileOutputStream(myFile)
-
-    val buf = ByteArray(1024)
-    var len: Int
-
-    while (inputStream.read(buf).also { len = it } > 0) outputStream.write(buf, 0, len)
-
-    outputStream.close()
-    inputStream.close()
-
-    return myFile
-}
-
 fun reduceFileImage(file: File): File {
     val bitmap = BitmapFactory.decodeFile(file.path)
     var compressQuality = 100
