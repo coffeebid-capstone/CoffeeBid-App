@@ -86,7 +86,7 @@
             android:id="@+id/sb_search_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Cari kopi terbaik" />
+            android:hint="@string/hint_search_bar" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -94,8 +94,15 @@
         android:id="@+id/sv_search_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:hint="Cari kopi terbaik anda"
+        android:hint="@string/hint_search_view"
         app:layout_anchor="@id/sb_search_bar" />
+
+    <include
+        android:id="@+id/layout_message"
+        layout="@layout/layout_illustration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
 
     <include
         android:id="@+id/progress_bar"

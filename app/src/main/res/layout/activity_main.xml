@@ -27,4 +27,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/main_menu" />
 
+    <include
+        android:id="@+id/layout_message"
+        layout="@layout/layout_illustration"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

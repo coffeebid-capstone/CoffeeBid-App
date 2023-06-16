@@ -26,4 +26,10 @@
     <string name="prompt_confirm_password">Konfirmasi password</string>
     <string name="prompt_address">Masukkan alamat</string>
     <string name="prompt_phone">Masukkan no telepon</string>
+    <string name="empty_message">Product Lelang Kosong</string>
+    <string name="empty_message_subtitle">Tunggu sebentar data product lelang akan segera tersedia</string>
+    <string name="error_message">Yah ada kesalahan</string>
+    <string name="error_message_subtitle">Pastikan koneksi internet anda terhubung dengan jaringan</string>
+    <string name="hint_search_view">Cari kopi terbaik anda</string>
+    <string name="hint_search_bar">Cari kopi terbaik</string>
 </resources>

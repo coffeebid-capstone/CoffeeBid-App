@@ -78,7 +78,7 @@ class AuthRepository private constructor(
         }
     }
 
-    fun getAllProduct(): LiveData<Result<List<ProductResponseItem>>> = liveData {
+    fun getAllProduct(): LiveData<Result<List<ProductResponseItem>?>> = liveData {
         emit(Result.Loading)
         try {
             val response = client.getAllProduct()

@@ -5,17 +5,18 @@ import android.content.Intent
 import android.content.SearchRecentSuggestionsProvider
 import android.os.Bundle
 import android.provider.SearchRecentSuggestions
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aplimelta.coffeebidapp.R
 import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.data.source.model.ProductModel
+import com.aplimelta.coffeebidapp.data.source.remote.response.ProductResponseItem
+import com.aplimelta.coffeebidapp.data.source.remote.response.SearchProductResponseItem
 import com.aplimelta.coffeebidapp.databinding.FragmentHomeBinding
 import com.aplimelta.coffeebidapp.ui.CoffeeAdapter
 import com.aplimelta.coffeebidapp.ui.MainViewModel
@@ -64,46 +65,72 @@ class HomeFragment : Fragment() {
                 val text = v.text
                 if (text.toString() != "") {
                     viewModel.searchProductByName(text.toString())
-                        .observe(viewLifecycleOwner) { result ->
+                        .observe(viewLifecycleOwner) { result: Result<List<SearchProductResponseItem>?> ->
                             when (result) {
-                                is Result.Error -> requireActivity().toast(result.message)
+                                is Result.Error -> {
+                                    binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                                    showMessageEmpty(false)
+                                    showMessageError(true)
+                                }
 
-                                Result.Loading -> requireActivity().toast("Loading...")
+                                Result.Loading -> {
+                                    binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                                    showMessageEmpty(false)
+                                    showMessageError(false)
+                                }
 
                                 is Result.Success -> {
                                     val searchCoffees = result.data
-                                    val data =
-                                        MappingHelper.searchProductResponseToModel(searchCoffees)
-                                    val product = MappingHelper.searchToProductModel(data)
-                                    adapter.submitList(product)
+                                    if (searchCoffees != null) {
+                                        binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                                        showMessageEmpty(false)
+                                        showMessageError(false)
+                                        val data =
+                                            MappingHelper.searchProductResponseToModel(searchCoffees)
+                                        val product = MappingHelper.searchToProductModel(data)
+                                        adapter.submitList(product)
+                                    } else {
+                                        binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                                        showMessageError(false)
+                                        showMessageEmpty(true)
+                                    }
                                 }
                             }
                         }
                 }
 
-                Log.d("Home", "onViewCreated: $text")
                 binding?.sbSearchBar?.text = text ?: null
                 binding?.svSearchView?.hide()
                 false
             }
 
-            viewModel.coffees.observe(viewLifecycleOwner) { result ->
+            viewModel.coffees.observe(viewLifecycleOwner) { result: Result<List<ProductResponseItem>?> ->
                 when (result) {
                     is Result.Error -> {
                         binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
-                        Toast.makeText(
-                            requireActivity(), result.message, Toast.LENGTH_LONG
-                        ).show()
+                        showMessageEmpty(false)
+                        showMessageError(true)
                     }
 
-                    Result.Loading -> binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                    Result.Loading -> {
+                        binding?.progressBar?.progressBar?.visibility = View.VISIBLE
+                        showMessageEmpty(false)
+                        showMessageError(false)
+                    }
 
                     is Result.Success -> {
-                        binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
                         val coffees = result.data
-                        val data = MappingHelper.productResponseToModel(coffees)
-                        Log.d("Home", "onViewCreated: $data")
-                        adapter.submitList(data)
+                        if (coffees != null) {
+                            binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                            showMessageEmpty(false)
+                            showMessageError(false)
+                            val data = MappingHelper.productResponseToModel(coffees)
+                            adapter.submitList(data)
+                        } else {
+                            binding?.progressBar?.progressBar?.visibility = View.INVISIBLE
+                            showMessageError(false)
+                            showMessageEmpty(true)
+                        }
                     }
                 }
             }
@@ -129,6 +156,34 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(detailDestination)
             }
         })
+    }
+
+    private fun showMessageEmpty(state: Boolean) {
+        binding?.apply {
+            layoutMessage.root.visibility = if (state) {
+                layoutMessage.sivIllustrationImage.setImageResource(R.drawable.ic_undraw_empty)
+                layoutMessage.tvTitleMessage.text = resources.getString(R.string.empty_message)
+                layoutMessage.tvSubtitleMessage.text =
+                    resources.getString(R.string.empty_message_subtitle)
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+        }
+    }
+
+    private fun showMessageError(state: Boolean) {
+        binding?.apply {
+            layoutMessage.root.visibility = if (state) {
+                layoutMessage.sivIllustrationImage.setImageResource(R.drawable.ic_undraw_server_cluster)
+                layoutMessage.tvTitleMessage.text = resources.getString(R.string.error_message)
+                layoutMessage.tvTitleMessage.text =
+                    resources.getString(R.string.error_message_subtitle)
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+        }
     }
 
     override fun onDestroyView() {
