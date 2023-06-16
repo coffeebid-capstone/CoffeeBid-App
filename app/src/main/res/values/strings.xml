@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">CoffeeBid App</string>
-    <string name="don_t_have_an_account_yet">Don\'t have an account yet?</string>
-    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_have_an_account_yet">Belum memiliki akun?</string>
+    <string name="already_have_an_account">Sudah memiliki akun?</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
-    <string name="login">Login</string>
-    <string name="register">Register</string>
+    <string name="login">Masuk</string>
+    <string name="register">Daftar</string>
     <string name="error_email">Pastikan format email benar</string>
     <string name="error_password">Pastikan password lebih dari 8 karakter</string>
     <string name="error_address">Pastikan isi kolom alamat dengan benar</string>
@@ -13,13 +13,17 @@
     <string name="title_register">Daftar untuk memperoleh akun</string>
     <string name="subtitle_auth">Temukan semua jenis kopi disatu tempat dengan\nbergabung pada aplikasi dengan mudah</string>
     <string name="login_title">Masuk untuk memenangkan kopi</string>
-    <string name="home">Home</string>
-    <string name="detection">Detection</string>
-    <string name="history">History</string>
-    <string name="profile">Profile</string>
+    <string name="home">Beranda</string>
+    <string name="detection">Deteksi</string>
+    <string name="history">Histori</string>
+    <string name="profile">Profil</string>
     <string name="tab_text_1">Prediksi</string>
-    <string name="tab_text_2">Rosting</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab_text_2">Roasting</string>
     <string name="logout">Keluar</string>
+    <string name="prompt_password">Masukkan password</string>
+    <string name="prompt_email">Masukkan email</string>
+    <string name="prompt_name">Masukkan nama</string>
+    <string name="prompt_confirm_password">Konfirmasi password</string>
+    <string name="prompt_address">Masukkan alamat</string>
+    <string name="prompt_phone">Masukkan no telepon</string>
 </resources>

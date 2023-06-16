@@ -1,8 +1,11 @@
 package com.aplimelta.coffeebidapp.ui.auth.activity
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -47,6 +50,23 @@ class AuthActivity : AppCompatActivity() {
                 }
             }
         }
+
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        val accountAuth =
+            ObjectAnimator.ofFloat(binding.authFooter.tvInfoAuth, View.ALPHA, 1F).setDuration(500)
+        val btnAuth =
+            ObjectAnimator.ofFloat(binding.authFooter.btnRegister, View.ALPHA, 1F).setDuration(500)
+
+        AnimatorSet().apply {
+            playSequentially(
+                accountAuth, btnAuth
+            )
+            startDelay = 500
+            start()
+        }
     }
 
     fun directToMainActivity() {
@@ -56,8 +76,7 @@ class AuthActivity : AppCompatActivity() {
     }
 
     private fun hideSystemUI() {
-        @Suppress("DEPRECATION")
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+        @Suppress("DEPRECATION") if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             window.insetsController?.hide(WindowInsets.Type.systemBars() or WindowInsets.Type.navigationBars())
         } else {
             window.setFlags(

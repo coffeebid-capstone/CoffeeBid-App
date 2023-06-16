@@ -1,5 +1,7 @@
 package com.aplimelta.coffeebidapp.ui.auth.fragment
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -96,6 +98,48 @@ class RegisterFragment : Fragment() {
                     }
                 }
             }
+
+            playAnimation()
+        }
+    }
+
+    private fun playAnimation() {
+        val titleHero =
+            ObjectAnimator.ofFloat(binding?.tvTitleRegister, View.ALPHA, 1F).setDuration(500)
+        val subTitleHero =
+            ObjectAnimator.ofFloat(binding?.tvSubtitleRegister, View.ALPHA, 1F).setDuration(500)
+        val etName =
+            ObjectAnimator.ofFloat(binding?.cetRegisterName, View.ALPHA, 1F).setDuration(500)
+        val etEmail =
+            ObjectAnimator.ofFloat(binding?.cetRegisterEmail, View.ALPHA, 1F).setDuration(500)
+        val etPassword =
+            ObjectAnimator.ofFloat(binding?.cetRegisterPassword, View.ALPHA, 1F).setDuration(500)
+        val etPasswordConfirm =
+            ObjectAnimator.ofFloat(binding?.cetRegisterPasswordConfirm, View.ALPHA, 1F)
+                .setDuration(500)
+        val etAddress =
+            ObjectAnimator.ofFloat(binding?.cetRegisterAddress, View.ALPHA, 1F)
+                .setDuration(500)
+        val etPhone =
+            ObjectAnimator.ofFloat(binding?.cetRegisterPhone, View.ALPHA, 1F)
+                .setDuration(500)
+        val btnRegister =
+            ObjectAnimator.ofFloat(binding?.btnRegister, View.ALPHA, 1F).setDuration(500)
+
+        AnimatorSet().apply {
+            playSequentially(
+                titleHero,
+                subTitleHero,
+                etName,
+                etEmail,
+                etPassword,
+                etPasswordConfirm,
+                etAddress,
+                etPhone,
+                btnRegister
+            )
+            startDelay = 500
+            start()
         }
     }
 

@@ -1,5 +1,7 @@
 package com.aplimelta.coffeebidapp.ui.auth.fragment
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.aplimelta.coffeebidapp.data.source.Result
 import com.aplimelta.coffeebidapp.data.source.remote.request.SignInRequest
-import com.aplimelta.coffeebidapp.data.source.remote.response.ProfileResponse
 import com.aplimelta.coffeebidapp.databinding.FragmentLoginBinding
 import com.aplimelta.coffeebidapp.ui.MainViewModel
 import com.aplimelta.coffeebidapp.ui.ViewModelFactory
@@ -77,6 +78,33 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
+
+            playAnimation()
+        }
+    }
+
+    private fun playAnimation() {
+        val titleHero =
+            ObjectAnimator.ofFloat(binding?.tvTitleLogin, View.ALPHA, 1F).setDuration(500)
+        val subTitleHero =
+            ObjectAnimator.ofFloat(binding?.tvSubtitleLogin, View.ALPHA, 1F).setDuration(500)
+        val etEmail =
+            ObjectAnimator.ofFloat(binding?.cetLoginEmail, View.ALPHA, 1F).setDuration(500)
+        val etPassword =
+            ObjectAnimator.ofFloat(binding?.cetLoginPassword, View.ALPHA, 1F).setDuration(500)
+        val btnLogin =
+            ObjectAnimator.ofFloat(binding?.btnLogin, View.ALPHA, 1F).setDuration(500)
+
+        AnimatorSet().apply {
+            playSequentially(
+                titleHero,
+                subTitleHero,
+                etEmail,
+                etPassword,
+                btnLogin
+            )
+            startDelay = 500
+            start()
         }
     }
 
