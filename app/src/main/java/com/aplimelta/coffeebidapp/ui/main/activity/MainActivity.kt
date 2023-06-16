@@ -55,12 +55,12 @@ class MainActivity : AppCompatActivity() {
         viewModel.profile.observe(this) { result: Result<ProfileResponse?> ->
             when (result) {
                 Result.Loading -> {
-                    hideView(true)
+                    showMessageEmpty(false)
+                    showMessageError(false)
                     this@MainActivity.toast("Loading...")
                 }
 
                 is Result.Error -> {
-                    hideView(false)
                     showMessageEmpty(false)
                     showMessageError(true)
                 }
@@ -68,13 +68,10 @@ class MainActivity : AppCompatActivity() {
                 is Result.Success -> {
                     val profile = result.data
                     if (profile != null) {
-                        hideView(false)
                         showMessageEmpty(false)
                         showMessageError(false)
                     } else {
-                        hideView(false)
                         showMessageError(false)
-                        showMessageEmpty(true)
                         startActivity(Intent(this@MainActivity, AuthActivity::class.java))
                         finish()
                     }
